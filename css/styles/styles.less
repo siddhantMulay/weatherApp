@@ -1,0 +1,42 @@
+@import '../common/variables.less';
+
+body {
+    padding: 1rem;
+}
+
+//SEARCH
+#searchBlock {
+    position: relative;
+
+    &::before,
+    &::after {
+        content : '';
+        width   : 15px;
+        height  : 15px;
+        position: absolute;
+        top     : 15px;
+    }
+
+    &::before {
+        background: url('../../assets/icons/location.svg') no-repeat;
+        left      : 15px;
+    }
+
+    &::after {
+        background: url('../../assets/icons/search.svg') no-repeat;
+        right     : 16px;
+    }
+
+
+    #searchText {
+        width             : 100%;
+        padding           : 12px 2.6rem;
+        border-radius     : 6px;
+        border            : none;
+        outline           : none;
+        font-size         : 15px;
+        -webkit-box-shadow: @inputShadow;
+        -moz-box-shadow   : @inputShadow;
+        box-shadow        : @inputShadow;
+    }
+}
