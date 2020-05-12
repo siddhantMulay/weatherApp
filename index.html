@@ -11,6 +11,12 @@
 
 <body>
 
+    <!-- Loader -->
+    <div class="pageLoader" data-active="true">
+        <i class="sunny large"></i>
+        <span>Forecasting...</span>
+    </div>
+
     <!-- Search Block -->
     <div id="searchBlock">
         <input type="text" id="searchText" placeholder="Enter City">
@@ -63,94 +69,9 @@
         </div>
     </div>
 
+    <!-- All Weather Data -->
+    <div id="weatherData">
 
-    <!-- Forecast -->
-    <div id="forecast">
-        <div class="forecastItem">
-            <div class="day">Fri</div>
-            <div class="temp">
-                <span class="high">28°</span>
-                <span class="low">19°</span>
-            </div>
-            <i class="sunny small"></i>
-            <div class="forecast">Sunny</div>
-        </div>
-
-        <div class="forecastItem">
-            <div class="day">Sat</div>
-            <div class="temp">
-                <span class="high">28°</span>
-                <span class="low">19°</span>
-            </div>
-            <i class="sunny small"></i>
-            <div class="forecast">Sunny</div>
-        </div>
-
-        <div class="forecastItem">
-            <div class="day">Sun</div>
-            <div class="temp">
-                <span class="high">28°</span>
-                <span class="low">19°</span>
-            </div>
-            <i class="sunny small"></i>
-            <div class="forecast">Sunny</div>
-        </div>
-
-        <div class="forecastItem">
-            <div class="day">Mon</div>
-            <div class="temp">
-                <span class="high">28°</span>
-                <span class="low">19°</span>
-            </div>
-            <i class="sunny small"></i>
-            <div class="forecast">Sunny</div>
-        </div>
-
-        <div class="forecastItem">
-            <div class="day">Tues</div>
-            <div class="temp">
-                <span class="high">28°</span>
-                <span class="low">19°</span>
-            </div>
-            <i class="sunny small"></i>
-            <div class="forecast">Sunny</div>
-        </div>
-
-    </div>
-
-    <!-- Detailed Forecast -->
-    <div id="detailedForecast">
-        <div class="tempDetail">
-            <span class="temp">28°C</span>
-            <i class="sunny large"></i>
-        </div>
-
-        <canvas id="myChart"></canvas>
-
-        <div class="dataBlock" data-bg="true">
-            <div class="pressure">
-                <div class="label">Pressure</div>
-                <div class="data">1013 hpa</div>
-            </div>
-            <div class="humidity">
-                <div class="label">Humidity</div>
-                <div class="data">93%</div>
-            </div>
-        </div>
-
-        <div id="ssConfig">
-            <div class="dataBlock" data-bg="false">
-                <div class="pressure">
-                    <div class="label">Sunrise</div>
-                    <div class="data">7:22am</div>
-                </div>
-                <div class="humidity">
-                    <div class="label">Sunset</div>
-                    <div class="data">93%</div>
-                </div>
-            </div>
-            <canvas id="ssChart"></canvas>
-        </div>
     </div>
 
     <!-- Attribution -->
@@ -162,9 +83,63 @@
     <!-- Scripts -->
     <script src="js/plugins/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script src="js/plugins/handlebars.min.js"></script>
     <script src="js/common/config.js"></script>
     <script src="js/scripts/chart.js"></script>
     <script src="js/scripts/index.js"></script>
+
+    <!-- Templates -->
+    <script type="text/x-handlebars-template" id="weatherPageTemplate">
+        <!-- Forecast -->
+        <div id="forecast">
+            {{#each daily}}
+            <div class="forecastItem">
+                <div class="day">{{formatDay dt}}</div>
+                <div class="temp">
+                    <span class="high">{{rounder temp.max}}°</span>
+                    <span class="low">{{rounder temp.min}}°</span>
+                </div>
+                <i class="{{iconHelper weather.0.description}} small"></i>
+                <div class="forecast">{{weather.0.main}}</div>
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- Detailed Forecast -->
+        <div id="detailedForecast">
+            <div class="tempDetail">
+                <span class="temp">{{current.temp}}°C</span>
+                <i class="{{iconHelper current.weather.0.description}} large"></i>
+            </div>
+
+            <canvas id="myChart"></canvas>
+
+            <div class="dataBlock" data-bg="true">
+                <div class="pressure">
+                    <div class="label">Pressure</div>
+                    <div class="data">{{current.pressure}} hpa</div>
+                </div>
+                <div class="humidity">
+                    <div class="label">Humidity</div>
+                    <div class="data">{{current.humidity}}%</div>
+                </div>
+            </div>
+
+            <div id="ssConfig">
+                <div class="dataBlock" data-bg="false">
+                    <div class="pressure">
+                        <div class="label">Sunrise</div>
+                        <div class="data">{{formatTime current.sunrise}}</div>
+                    </div>
+                    <div class="humidity">
+                        <div class="label">Sunset</div>
+                        <div class="data">{{formatTime current.sunset}}</div>
+                    </div>
+                </div>
+                <canvas id="ssChart"></canvas>
+            </div>
+        </div>
+    </script>
 </body>
 
 </html>

@@ -83,7 +83,7 @@ body {
 #forecast {
   margin: 10px 0;
   display: grid;
-  grid-template-columns: repeat(7, 70px);
+  grid-template-columns: repeat(8, 70px);
   column-gap: 0.5rem;
   overflow-x: auto;
 }

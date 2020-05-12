@@ -16,3 +16,18 @@ i.sunny {
 i.rain {
   content: url('../../assets/icons/storm-1.svg');
 }
+i.storm {
+  content: url('../../assets/icons/storm-2.svg');
+}
+i.cloudy {
+  content: url('../../assets/icons/cloud.svg');
+}
+i.brokenCloud {
+  content: url('../../assets/icons/cloudy-2.svg');
+}
+i.clear {
+  content: url('../../assets/icons/sun-1.svg');
+}
+i.overcast {
+  content: url('../../assets/icons/cloudy-1.svg');
+}
