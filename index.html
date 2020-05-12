@@ -5,17 +5,92 @@
     <title>Weather App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/common/common.css">
+    <link rel="stylesheet" href="./css/common/weather.css">
     <link rel="stylesheet" href="./css/styles/styles.css">
 </head>
 
 <body>
 
+    <!-- Search Block -->
     <div id="searchBlock">
-        <!-- <img src="./assets/icons/location.svg" alt=""> -->
         <input type="text" id="searchText" placeholder="Enter City">
-        <!-- <img src="./assets/icons/search.svg" alt=""> -->
     </div>
 
+    <!-- Forecast -->
+    <div id="forecast">
+        <div class="forecastItem">
+            <div class="day">Fri</div>
+            <div class="temp">
+                <span class="high">28°</span>
+                <span class="low">19°</span>
+            </div>
+            <i class="sunny small"></i>
+            <div class="forecast">Sunny</div>
+        </div>
+
+        <div class="forecastItem">
+            <div class="day">Sat</div>
+            <div class="temp">
+                <span class="high">28°</span>
+                <span class="low">19°</span>
+            </div>
+            <i class="sunny small"></i>
+            <div class="forecast">Sunny</div>
+        </div>
+
+        <div class="forecastItem">
+            <div class="day">Sun</div>
+            <div class="temp">
+                <span class="high">28°</span>
+                <span class="low">19°</span>
+            </div>
+            <i class="sunny small"></i>
+            <div class="forecast">Sunny</div>
+        </div>
+
+        <div class="forecastItem">
+            <div class="day">Mon</div>
+            <div class="temp">
+                <span class="high">28°</span>
+                <span class="low">19°</span>
+            </div>
+            <i class="sunny small"></i>
+            <div class="forecast">Sunny</div>
+        </div>
+
+        <div class="forecastItem">
+            <div class="day">Tues</div>
+            <div class="temp">
+                <span class="high">28°</span>
+                <span class="low">19°</span>
+            </div>
+            <i class="sunny small"></i>
+            <div class="forecast">Sunny</div>
+        </div>
+
+    </div>
+
+    <!-- Detailed Forecast -->
+    <div id="detailedForecast">
+        <div class="tempDetail">
+            <span class="temp">28°C</span>
+            <i class="sunny large"></i>
+        </div>
+
+        <!-- <div id="chartdiv"></div> -->
+        <canvas id="myChart"></canvas>
+
+        <div class="dataBlock">
+            <div class="pressure">
+                <div class="label">Pressure</div>
+                <div class="data">1013 hpa</div>
+            </div>
+            <div class="humidity">
+                <div class="label">Humidity</div>
+                <div class="data">93%</div>
+            </div>
+        </div>
+    </div>
 
     <!-- Attribution -->
     <div style="display: none;">
@@ -23,8 +98,14 @@
             href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- Scripts -->
     <script src="js/plugins/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+    <!-- <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script> -->
+    <script src="js/scripts/chart.js"></script>
     <script src="js/scripts/index.js"></script>
 </body>
 

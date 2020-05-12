@@ -31,3 +31,63 @@ body {
   -moz-box-shadow: 0px 0px 5px 0px #c9c9c9;
   box-shadow: 0px 0px 5px 0px #c9c9c9;
 }
+#forecast {
+  margin: 10px 0;
+  display: grid;
+  grid-template-columns: repeat(7, 70px);
+  column-gap: 0.5rem;
+  overflow-x: auto;
+}
+#forecast .forecastItem {
+  text-align: center;
+  padding: 10px;
+}
+#forecast .forecastItem .day,
+#forecast .forecastItem .high {
+  font-weight: bold;
+}
+#forecast .forecastItem i {
+  margin-top: 8px;
+}
+#forecast .forecastItem .forecast {
+  font-size: 14px;
+  color: #7b7b7b;
+}
+#detailedForecast {
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 0px 5px 0px #c9c9c9;
+  -moz-box-shadow: 0px 0px 5px 0px #c9c9c9;
+  box-shadow: 0px 0px 5px 0px #c9c9c9;
+}
+#detailedForecast .tempDetail {
+  display: flex;
+  align-items: center;
+}
+#detailedForecast .tempDetail .temp {
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding-right: 20px;
+  letter-spacing: 2px;
+}
+#detailedForecast #chartdiv {
+  height: 25vh;
+}
+#detailedForecast .dataBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+#detailedForecast .dataBlock > div {
+  background-color: #e6f1fd;
+  padding: 10px 15px;
+  width: 50%;
+  border-radius: 6px;
+}
+#detailedForecast .dataBlock > div:last-child {
+  margin-left: 15px;
+}
+#detailedForecast .dataBlock > div .label {
+  font-weight: bold;
+}

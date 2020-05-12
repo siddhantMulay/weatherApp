@@ -1,0 +1,18 @@
+i {
+  position: relative;
+}
+i.small {
+  width: 25px;
+}
+i.med {
+  width: 35px;
+}
+i.large {
+  width: 50px;
+}
+i.sunny {
+  content: url('../../assets/icons/sun-1.svg');
+}
+i.rain {
+  content: url('../../assets/icons/storm-1.svg');
+}

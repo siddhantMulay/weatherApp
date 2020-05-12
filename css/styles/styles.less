@@ -35,8 +35,84 @@ body {
         border            : none;
         outline           : none;
         font-size         : 15px;
-        -webkit-box-shadow: @inputShadow;
-        -moz-box-shadow   : @inputShadow;
-        box-shadow        : @inputShadow;
+        -webkit-box-shadow: @boxShadow;
+        -moz-box-shadow   : @boxShadow;
+        box-shadow        : @boxShadow;
+    }
+}
+
+//FORECAST
+#forecast {
+    margin               : 10px 0;
+    display              : grid;
+    grid-template-columns: repeat(7, 70px);
+    column-gap           : 0.5rem;
+    overflow-x           : auto;
+
+    .forecastItem {
+        text-align: center;
+        padding   : 10px;
+
+        .day,
+        .high {
+            font-weight: bold;
+        }
+
+        i {
+            margin-top: 8px;
+        }
+
+        .forecast {
+            font-size: 14px;
+            color    : #7b7b7b;
+        }
+    }
+}
+
+//DETAILED FORECAST
+#detailedForecast {
+    padding           : 1rem 2rem;
+    border-radius     : 6px;
+    -webkit-box-shadow: @boxShadow;
+    -moz-box-shadow   : @boxShadow;
+    box-shadow        : @boxShadow;
+
+    .tempDetail {
+        display    : flex;
+        align-items: center;
+
+        .temp {
+            font-size     : 2.5rem;
+            font-weight   : bold;
+            padding-right : 20px;
+            letter-spacing: 2px;
+        }
+    }
+
+    #chartdiv {
+        height: 25vh;
+    }
+
+    .dataBlock {
+        display        : flex;
+        align-items    : center;
+        justify-content: space-between;
+        margin         : 15px 0;
+
+        >div {
+            background-color: #e6f1fd;
+            padding         : 10px 15px;
+            width           : 50%;
+            border-radius   : 6px;
+
+            &:last-child {
+                margin-left: 15px;
+            }
+
+            .label {
+                font-weight: bold;
+            }
+
+        }
     }
 }
