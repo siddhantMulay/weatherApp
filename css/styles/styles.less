@@ -1,5 +1,10 @@
 @import '../common/variables.less';
 
+html {
+    max-width: 800px;
+    margin   : 0 auto;
+}
+
 body {
     padding: 1rem;
 }
@@ -116,6 +121,10 @@ body {
     .forecastItem {
         text-align: center;
         padding   : 10px;
+
+        .temp {
+            font-size: 15px;
+        }
 
         .day,
         .high {

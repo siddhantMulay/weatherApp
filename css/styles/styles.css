@@ -1,3 +1,7 @@
+html {
+  max-width: 800px;
+  margin: 0 auto;
+}
 body {
   padding: 1rem;
 }
@@ -93,6 +97,9 @@ body {
 #forecast .forecastItem {
   text-align: center;
   padding: 10px;
+}
+#forecast .forecastItem .temp {
+  font-size: 15px;
 }
 #forecast .forecastItem .day,
 #forecast .forecastItem .high {

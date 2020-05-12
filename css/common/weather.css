@@ -14,10 +14,25 @@ i.sunny {
   content: url('../../assets/icons/sun-1.svg');
 }
 i.rain {
+  content: url('../../assets/icons/rain.svg');
+}
+i.rainMod {
+  content: url('../../assets/icons/rain-1.svg');
+}
+i.rainHeavy {
   content: url('../../assets/icons/storm-1.svg');
 }
 i.storm {
   content: url('../../assets/icons/storm-2.svg');
+}
+i.smoke {
+  content: url('../../assets/icons/sun.svg');
+}
+i.snow {
+  content: url('../../assets/icons/snowflake.svg');
+}
+i.haze {
+  content: url('../../assets/icons/haze.svg');
 }
 i.cloudy {
   content: url('../../assets/icons/cloud.svg');

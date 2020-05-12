@@ -22,50 +22,6 @@
         <input type="text" id="searchText" placeholder="Enter City">
         <!-- Suggestions -->
         <div id="suggestions" data-visible="false">
-            <div class="item">
-                <div class="place">
-                    Mumbai, Maharashtra
-                </div>
-                <div class="temp">
-                    <span> 8°C
-                        <span class="forecast">Rain</span>
-                    </span>
-                    <i class="sunny small"></i>
-                </div>
-            </div>
-            <div class="item">
-                <div class="place">
-                    Mumbai, Maharashtra
-                </div>
-                <div class="temp">
-                    <span> 8°C
-                        <span class="forecast">Rain</span>
-                    </span>
-                    <i class="sunny small"></i>
-                </div>
-            </div>
-            <div class="item">
-                <div class="place">
-                    Mumbai, Maharashtra
-                </div>
-                <div class="temp">
-                    <span> 8°C
-                        <span class="forecast">Rain</span>
-                    </span>
-                    <i class="sunny small"></i>
-                </div>
-            </div>
-            <div class="item">
-                <div class="place">
-                    Mumbai, Maharashtra
-                </div>
-                <div class="temp">
-                    <span> 8°C
-                        <span class="forecast">Rain</span>
-                    </span>
-                    <i class="sunny small"></i>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -89,6 +45,7 @@
     <script src="js/scripts/index.js"></script>
 
     <!-- Templates -->
+    <!-- Search Results -->
     <script type="text/x-handlebars-template" id="searchResultsTemplate">
         {{#each this}}
         <div class="item" data-city="{{city}}" data-region="{{region}}" data-lat="{{latitude}}" data-long="{{longitude}}">
@@ -96,10 +53,10 @@
                 {{city}}, {{region}}, {{country}}
             </div>
             <div class="temp">
-                <span> {{temp}}°C
+                <span> {{rounder temp}}°C
                     <span class="forecast">{{forecast}}</span>
                 </span>
-                <i class="{{icon}} small"></i>
+                <i class="{{iconHelper icon}} small"></i>
             </div>
         </div>
         {{/each}}
@@ -126,7 +83,7 @@
     <!-- Detailed Forecast -->
     <div id="detailedForecast">
         <div class="tempDetail">
-            <span class="temp">{{current.temp}}°C</span>
+            <span class="temp">{{rounder current.temp}}°C</span>
             <i class="{{iconHelper current.weather.0.description}} large"></i>
         </div>
 
