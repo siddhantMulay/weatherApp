@@ -2,13 +2,12 @@
 initalizeCharts = (forecastData, ssData) => {
 
     var ctx = document.getElementById("myChart").getContext('2d');
-
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: ["9am", "10am", "11am", "12pm", "1pm", "2pm"],
             datasets: [{
-                data: [24, 27, 28, 30, 45, 30],
+                data: forecastData,
                 fill: false,
                 borderColor: '#2196f3',
                 backgroundColor: '#2196f3',

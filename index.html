@@ -82,63 +82,63 @@
 
     <!-- Scripts -->
     <script src="js/plugins/jquery-3.2.1.min.js"></script>
+    <script src="js/common/config.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
     <script src="js/plugins/handlebars.min.js"></script>
-    <script src="js/common/config.js"></script>
     <script src="js/scripts/chart.js"></script>
     <script src="js/scripts/index.js"></script>
 
     <!-- Templates -->
     <script type="text/x-handlebars-template" id="weatherPageTemplate">
         <!-- Forecast -->
-        <div id="forecast">
-            {{#each daily}}
-            <div class="forecastItem">
-                <div class="day">{{formatDay dt}}</div>
-                <div class="temp">
-                    <span class="high">{{rounder temp.max}}°</span>
-                    <span class="low">{{rounder temp.min}}°</span>
-                </div>
-                <i class="{{iconHelper weather.0.description}} small"></i>
-                <div class="forecast">{{weather.0.main}}</div>
+    <div id="forecast">
+        {{#each daily}}
+        <div class="forecastItem">
+            <div class="day">{{formatDay dt}}</div>
+            <div class="temp">
+                <span class="high">{{rounder temp.max}}°</span>
+                <span class="low">{{rounder temp.min}}°</span>
             </div>
-            {{/each}}
+            <i class="{{iconHelper weather.0.description}} small"></i>
+            <div class="forecast">{{weather.0.main}}</div>
+        </div>
+        {{/each}}
+    </div>
+
+    <!-- Detailed Forecast -->
+    <div id="detailedForecast">
+        <div class="tempDetail">
+            <span class="temp">{{current.temp}}°C</span>
+            <i class="{{iconHelper current.weather.0.description}} large"></i>
         </div>
 
-        <!-- Detailed Forecast -->
-        <div id="detailedForecast">
-            <div class="tempDetail">
-                <span class="temp">{{current.temp}}°C</span>
-                <i class="{{iconHelper current.weather.0.description}} large"></i>
+        <canvas id="myChart"></canvas>
+
+        <div class="dataBlock" data-bg="true">
+            <div class="pressure">
+                <div class="label">Pressure</div>
+                <div class="data">{{current.pressure}} hpa</div>
             </div>
+            <div class="humidity">
+                <div class="label">Humidity</div>
+                <div class="data">{{current.humidity}}%</div>
+            </div>
+        </div>
 
-            <canvas id="myChart"></canvas>
-
-            <div class="dataBlock" data-bg="true">
+        <div id="ssConfig">
+            <div class="dataBlock" data-bg="false">
                 <div class="pressure">
-                    <div class="label">Pressure</div>
-                    <div class="data">{{current.pressure}} hpa</div>
+                    <div class="label">Sunrise</div>
+                    <div class="data">{{formatTime current.sunrise}}</div>
                 </div>
                 <div class="humidity">
-                    <div class="label">Humidity</div>
-                    <div class="data">{{current.humidity}}%</div>
+                    <div class="label">Sunset</div>
+                    <div class="data">{{formatTime current.sunset}}</div>
                 </div>
             </div>
-
-            <div id="ssConfig">
-                <div class="dataBlock" data-bg="false">
-                    <div class="pressure">
-                        <div class="label">Sunrise</div>
-                        <div class="data">{{formatTime current.sunrise}}</div>
-                    </div>
-                    <div class="humidity">
-                        <div class="label">Sunset</div>
-                        <div class="data">{{formatTime current.sunset}}</div>
-                    </div>
-                </div>
-                <canvas id="ssChart"></canvas>
-            </div>
+            <canvas id="ssChart"></canvas>
         </div>
+    </div>
     </script>
 </body>
 

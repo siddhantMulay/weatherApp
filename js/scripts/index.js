@@ -1277,18 +1277,6 @@ Handlebars.registerHelper('formatTime', function (data) {
     return retData;
 })
 
-//Get Hourly Forecast Data
-getForecastData = (data) => {
-    var retData = [];
-    data.forEach((item) => {
-        var theDate = new Date(item.dt * 1000);
-        var hr = theDate.getHours();
-        if (hr > 8 && hr < 15) {
-            retData.push(item.temp);
-        }
-    })
-    initalizeCharts(retData.splice(5))
-}
 
 $(document).ready(function () {
 
@@ -1296,7 +1284,6 @@ $(document).ready(function () {
         $.ajax('http://ip-api.com/json')
             .then(
                 function success(response) {
-                    console.log('User\'s Location Data is ', response);
                     var userLoc = `${response.city}, ${response.regionName}`;
                     $('#searchText').val(userLoc);
                     getWeatherData(latitude, longitude);
@@ -1329,7 +1316,20 @@ $(document).ready(function () {
         console.log('geolocation is not enabled on this browser')
     }
 
+    //Get Hourly Forecast Data
+    getForecastData = (data) => {
+        var retData = [];
+        data.forEach((item) => {
+            var theDate = new Date(item.dt * 1000);
+            var hr = theDate.getHours();
+            if (hr > 8 && hr < 15) {
+                retData.push(item.temp);
+            }
+        })
+        initalizeCharts(retData.splice(5))
+    }
 
+    //Get Weather Data
     getWeatherData = (lat, lon) => {
         // $('.pageLoader').attr('data-active', true);
         console.log(JSON.parse(data))
@@ -1342,5 +1342,12 @@ $(document).ready(function () {
         // })
     }
 
+    //Search Block
+    $('#searchText').keyup(function (e) {
+        var val = $(this).val();
+        if (e.keyCode !== 8 && val.length > 3) {
+            searchCities(val)
+        }
+    })
 
 })
