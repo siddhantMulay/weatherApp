@@ -79,8 +79,25 @@ body {
   justify-content: space-between;
   margin: 15px 0;
 }
-#detailedForecast .dataBlock > div {
+#detailedForecast .dataBlock[data-bg="true"] > div {
   background-color: #e6f1fd;
+}
+#detailedForecast .dataBlock[data-bg="false"] {
+  font-size: 14px;
+}
+#detailedForecast .dataBlock[data-bg="false"] > div {
+  text-align: left;
+  padding: 0;
+  width: auto;
+}
+#detailedForecast .dataBlock[data-bg="false"] > div:last-child {
+  text-align: right;
+  margin-left: 0px;
+}
+#detailedForecast .dataBlock[data-bg="false"] > div .data {
+  color: gray;
+}
+#detailedForecast .dataBlock > div {
   padding: 10px 15px;
   width: 50%;
   border-radius: 6px;
@@ -90,4 +107,7 @@ body {
 }
 #detailedForecast .dataBlock > div .label {
   font-weight: bold;
+}
+#detailedForecast #ssConfig {
+  margin-top: 25px;
 }

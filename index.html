@@ -77,10 +77,9 @@
             <i class="sunny large"></i>
         </div>
 
-        <!-- <div id="chartdiv"></div> -->
         <canvas id="myChart"></canvas>
 
-        <div class="dataBlock">
+        <div class="dataBlock" data-bg="true">
             <div class="pressure">
                 <div class="label">Pressure</div>
                 <div class="data">1013 hpa</div>
@@ -89,6 +88,20 @@
                 <div class="label">Humidity</div>
                 <div class="data">93%</div>
             </div>
+        </div>
+
+        <div id="ssConfig">
+            <div class="dataBlock" data-bg="false">
+                <div class="pressure">
+                    <div class="label">Sunrise</div>
+                    <div class="data">7:22am</div>
+                </div>
+                <div class="humidity">
+                    <div class="label">Sunset</div>
+                    <div class="data">93%</div>
+                </div>
+            </div>
+            <canvas id="ssChart"></canvas>
         </div>
     </div>
 
@@ -101,10 +114,6 @@
     <!-- Scripts -->
     <script src="js/plugins/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
-
-    <!-- <script src="https://www.amcharts.com/lib/4/core.js"></script>
-    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script> -->
     <script src="js/scripts/chart.js"></script>
     <script src="js/scripts/index.js"></script>
 </body>

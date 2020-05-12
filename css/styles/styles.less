@@ -99,11 +99,35 @@ body {
         justify-content: space-between;
         margin         : 15px 0;
 
+        &[data-bg="true"] {
+            >div {
+                background-color: #e6f1fd;
+            }
+        }
+
+        &[data-bg="false"] {
+            font-size: 14px;
+
+            >div {
+                text-align: left;
+                padding   : 0;
+                width     : auto;
+
+                &:last-child {
+                    text-align : right;
+                    margin-left: 0px;
+                }
+
+                .data {
+                    color: gray
+                }
+            }
+        }
+
         >div {
-            background-color: #e6f1fd;
-            padding         : 10px 15px;
-            width           : 50%;
-            border-radius   : 6px;
+            padding      : 10px 15px;
+            width        : 50%;
+            border-radius: 6px;
 
             &:last-child {
                 margin-left: 15px;
@@ -114,5 +138,9 @@ body {
             }
 
         }
+    }
+
+    #ssConfig {
+        margin-top: 25px;
     }
 }
