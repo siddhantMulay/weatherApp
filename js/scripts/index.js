@@ -1331,23 +1331,52 @@ $(document).ready(function () {
 
     //Get Weather Data
     getWeatherData = (lat, lon) => {
-        // $('.pageLoader').attr('data-active', true);
-        console.log(JSON.parse(data))
-        var url = `${config.WEATHER_API_URL}lat=${lat}&lon=${lon}&appid=${config.WEATHER_API_KEY}&units=metric`;
-        bindDataToDOM('weatherPageTemplate', 'weatherData', JSON.parse(data));
-        getForecastData(JSON.parse(data).hourly)
-        // apiRequest(url, (response) => {
-        //     console.log(response)
-        //     $('.pageLoader').attr('data-active', false);
-        // })
+        $('.pageLoader').attr('data-active', true);
+        var url = `${config.WEATHER_API_URL}onecall?lat=${lat}&lon=${lon}&appid=${config.WEATHER_API_KEY}&units=metric`;
+        apiRequest(url, (response) => {
+            console.log(response)
+            bindDataToDOM('weatherPageTemplate', 'weatherData', response);
+            getForecastData(response.hourly)
+            $('.pageLoader').attr('data-active', false);
+            $('#suggestions').empty().attr('data-visible', false)
+        })
     }
+
+    //Get Current Weather Data
+    getCurrentWeatherData = (location, callback) => {
+        var url = `${config.WEATHER_API_URL}weather?q=${location}&appid=${config.WEATHER_API_KEY}&units=metric`;
+        apiRequest(url, (response) => {
+            callback(response)
+        })
+    }
+
+
+    var searchData = `{"coord":{"lon":72.85,"lat":19.01},"weather":[{"id":721,"main":"Haze","description":"haze","icon":"50n"}],"base":"stations","main":{"temp":30,"feels_like":34.5,"temp_min":30,"temp_max":30,"pressure":1007,"humidity":79},"visibility":5000,"wind":{"speed":3.6,"deg":300},"clouds":{"all":11},"dt":1589300341,"sys":{"type":1,"id":9052,"country":"IN","sunrise":1589243716,"sunset":1589290485},"timezone":19800,"id":1275339,"name":"Mumbai","cod":200}`
 
     //Search Block
     $('#searchText').keyup(function (e) {
         var val = $(this).val();
-        if (e.keyCode !== 8 && val.length > 3) {
-            searchCities(val)
+        if (e.keyCode !== 8 && val.length > 2) {
+            searchCities(val, (response) => {
+                var data = response.data;
+                bindDataToDOM('searchResultsTemplate', 'suggestions', data);
+                $('#suggestions').attr('data-visible', true);
+            })
         }
+        else if (val.length === 0) {
+            $('#suggestions').empty().attr('data-visible', false)
+        }
+    })
+
+    //View Weather Data
+    $('body').off('click', '.item').on('click', '.item', function () {
+        var lat = $(this).attr('data-lat');
+        var long = $(this).attr('data-long');
+        var city = $(this).attr('data-city');
+        var region = $(this).attr('data-region');
+        var userLoc = `${city}, ${region}`;
+        $('#searchText').val(userLoc);
+        getWeatherData(lat, long);
     })
 
 })

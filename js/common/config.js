@@ -1,16 +1,17 @@
 
 const config = {
     WEATHER_API_KEY: "b75dddf25be4051716ceb5c94cdf367f",
-    WEATHER_API_URL: "http://api.openweathermap.org/data/2.5/onecall?",
+    WEATHER_API_URL: "http://api.openweathermap.org/data/2.5/",
 }
 
 
-searchCities = (searchTem) => {
-    //City Search API
+//City Search API
+searchCities = (searchTem, callback) => {
     var citySearchSettings = {
         "async": true,
         "crossDomain": true,
-        "url": `https://andruxnet-world-cities-v1.p.rapidapi.com/?query=${searchTem}&searchby=city`,
+        
+        "url": `http://geodb-free-service.wirefreethought.com/v1/geo/cities?namePrefix=${searchTem}&limit=5&offset=0&hateoasMode=false`,
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "andruxnet-world-cities-v1.p.rapidapi.com",
@@ -19,7 +20,7 @@ searchCities = (searchTem) => {
     }
 
     $.ajax(citySearchSettings).done(function (response) {
-        console.log(response);
+        callback(response);
     });
 }
 

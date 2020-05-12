@@ -89,6 +89,24 @@
     <script src="js/scripts/index.js"></script>
 
     <!-- Templates -->
+    <script type="text/x-handlebars-template" id="searchResultsTemplate">
+        {{#each this}}
+        <div class="item" data-city="{{city}}" data-region="{{region}}" data-lat="{{latitude}}" data-long="{{longitude}}">
+            <div class="place">
+                {{city}}, {{region}}, {{country}}
+            </div>
+            <div class="temp">
+                <span> {{temp}}°C
+                    <span class="forecast">{{forecast}}</span>
+                </span>
+                <i class="{{icon}} small"></i>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+
+
+    <!-- Weather Template -->
     <script type="text/x-handlebars-template" id="weatherPageTemplate">
         <!-- Forecast -->
     <div id="forecast">
