@@ -2,100 +2,108 @@
 let latitude = '';
 let longitude = '';
 
-Handlebars.registerHelper('iconHelper', function (forecast) {
-    var retData = '';
-    switch (forecast) {
-        case "few clouds": {
-            retData = 'cloudy'
-            break;
-        }
-
-        case "smoke": {
-            retData = 'smoke'
-            break;
-        }
-        
-        case "scattered clouds": {
-            retData = 'cloudy'
-            break;
-        }
-
-        case "clear sky": {
-            retData = 'clear'
-            break;
-        }
-
-        case "broken clouds": {
-            retData = 'brokenCloud'
-            break;
-        }
-
-        case "overcast clouds": {
-            retData = 'overcast'
-            break;
-        }
-        case "light rain": {
-            retData = 'rain'
-            break;
-        }
-
-        case "shower rain": {
-            retData = 'rain'
-            break;
-        }
-
-        case "moderate rain": {
-            retData = 'rainMod'
-            break;
-        }
-
-        case "heavy intensity rain": {
-            retData = 'rainHeavy'
-            break;
-        }
-
-        case "snow": {
-            retData = 'snow'
-            break;
-        }
-        case "haze": {
-            retData = 'haze'
-            break;
-        }
-
-
-    }
-    return retData;
-});
-
-Handlebars.registerHelper('rounder', function (data) {
-    var retData = Math.round(data);
-    return retData;
-})
-
-Handlebars.registerHelper('formatDay', function (data) {
-    var retData = '';
-    var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    var theDate = new Date(data * 1000);
-    retData = days[theDate.getDay()];
-    return retData;
-})
-
-Handlebars.registerHelper('formatTime', function (data) {
-    var retData = '';
-    var theDate = new Date(data * 1000);
-    var hours = theDate.getHours();
-    var minutes = theDate.getMinutes();
-    var ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    retData = hours + ':' + minutes + ' ' + ampm;
-    return retData;
-})
 
 $(document).ready(function () {
 
+    //Initalize Handlebar Helpers
+    helpers = () => {
+
+        Handlebars.registerHelper('iconHelper', function (forecast) {
+            var retData = '';
+            switch (forecast) {
+                case "few clouds": {
+                    retData = 'cloudy'
+                    break;
+                }
+
+                case "smoke": {
+                    retData = 'smoke'
+                    break;
+                }
+
+                case "scattered clouds": {
+                    retData = 'cloudy'
+                    break;
+                }
+
+                case "clear sky": {
+                    retData = 'clear'
+                    break;
+                }
+
+                case "broken clouds": {
+                    retData = 'brokenCloud'
+                    break;
+                }
+
+                case "overcast clouds": {
+                    retData = 'overcast'
+                    break;
+                }
+                case "light rain": {
+                    retData = 'rain'
+                    break;
+                }
+
+                case "shower rain": {
+                    retData = 'rain'
+                    break;
+                }
+
+                case "moderate rain": {
+                    retData = 'rainMod'
+                    break;
+                }
+
+                case "heavy intensity rain": {
+                    retData = 'rainHeavy'
+                    break;
+                }
+
+                case "snow": {
+                    retData = 'snow'
+                    break;
+                }
+                case "haze": {
+                    retData = 'haze'
+                    break;
+                }
+
+
+            }
+            return retData;
+        });
+
+        Handlebars.registerHelper('rounder', function (data) {
+            var retData = Math.round(data);
+            return retData;
+        })
+
+        Handlebars.registerHelper('formatDay', function (data) {
+            var retData = '';
+            var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            var theDate = new Date(data * 1000);
+            retData = days[theDate.getDay()];
+            return retData;
+        })
+
+        Handlebars.registerHelper('formatTime', function (data) {
+            var retData = '';
+            var theDate = new Date(data * 1000);
+            var hours = theDate.getHours();
+            var minutes = theDate.getMinutes();
+            var ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            retData = hours + ':' + minutes + ' ' + ampm;
+            return retData;
+        })
+    }
+
+    helpers();
+
+    //IP Lookup
     ipLookUp = () => {
         $.ajax('http://ip-api.com/json')
             .then(
@@ -113,23 +121,25 @@ $(document).ready(function () {
             );
     }
 
+    //Check geolocation
     if ("geolocation" in navigator) {
-        // check if geolocation is supported/enabled on current browser
         navigator.geolocation.getCurrentPosition(function success(position) {
-            // for when getting location is a success
             latitude = position.coords.latitude;
             longitude = position.coords.longitude;
             ipLookUp();
         },
-            function error(error_message) {
-                // for when getting location results in an error
-                console.error('An error has occured while retrieving location', error_message)
-
+            function error(err) {
+                var errCode = err.code;
+                var msg = errCode === 1 ? "Location access denied. Allow location access and reload." :
+                    "An error has occured in fetching location, try again."
+                $('.pageLoader span').text(msg);
+                $('.pageLoader i').removeClass('sunny').addClass('storm').css('animation', 'none');
             }
         )
     }
     else {
-        console.log('geolocation is not enabled on this browser')
+        $('.pageLoader span').text('Geolocation is not enabled on this browser');
+        $('.pageLoader i').removeClass('sunny').addClass('storm').css('animation', 'none');
     }
 
     //Get Hourly Forecast Data
@@ -151,7 +161,6 @@ $(document).ready(function () {
         var url = `${config.WEATHER_API_URL}onecall?lat=${lat}&lon=${lon}&appid=${config.WEATHER_API_KEY}&units=metric`;
 
         apiRequest(url, (response) => {
-            console.log(response)
             bindDataToDOM('weatherPageTemplate', 'weatherData', response);
             getForecastData(response.hourly)
             $('.pageLoader').attr('data-active', false);
@@ -168,26 +177,7 @@ $(document).ready(function () {
         })
     }
 
-    //Search Block
-    $('#searchText').keyup(function (e) {
-        var val = $(this).val();
-        if (e.keyCode !== 8 && val.length > 2) {
-            $('#suggestions').attr('data-visible', true).html(`
-            <div class="secLoader">
-            <i class="sunny small"></i>
-        <span>Looking up...</span></div>`);
-            $('body').css('overflow', 'hidden')
-            searchCities(val, (response) => {
-                var data = response.data;
-                formatSearchData(data)
-            })
-        }
-        else if (val.length === 0) {
-            $('#suggestions').empty().attr('data-visible', false)
-            $('body').css('overflow', 'auto');
-        }
-    })
-
+    //Format search results data
     formatSearchData = (data) => {
         var retData = [];
         data.forEach((item) => {
@@ -211,6 +201,26 @@ $(document).ready(function () {
             })
         })
     }
+
+    //Search Block
+    $('#searchText').keyup(function (e) {
+        var val = $(this).val();
+        if (e.keyCode !== 8 && val.length > 2) {
+            $('#suggestions').attr('data-visible', true).html(`
+            <div class="secLoader">
+            <i class="sunny small"></i>
+        <span>Looking up...</span></div>`);
+            $('body').css('overflow', 'hidden')
+            searchCities(val, (response) => {
+                var data = response.data;
+                formatSearchData(data)
+            })
+        }
+        else if (val.length === 0) {
+            $('#suggestions').empty().attr('data-visible', false)
+            $('body').css('overflow', 'auto');
+        }
+    })
 
     //View Weather Data
     $('body').off('click', '.item').on('click', '.item', function () {

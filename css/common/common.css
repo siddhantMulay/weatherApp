@@ -73,6 +73,12 @@ body * {
   transform: scale(0);
   opacity: 0;
 }
+.pageLoader span {
+  text-align: center;
+  line-height: 1.7;
+  max-width: 200px;
+  margin-top: 20px;
+}
 @keyframes spin {
   from {
     transform: rotate(0);
