@@ -102,10 +102,10 @@ $(document).ready(function () {
     }
 
     helpers();
-
+    
     //IP Lookup
     ipLookUp = () => {
-        $.ajax('https://ip-api.com/json')
+        $.ajax('http://ip-api.com/json')
             .then(
                 function success(response) {
                     var userLoc = `${response.city}, ${response.regionName}`;
