@@ -1,7 +1,7 @@
 
 const config = {
     WEATHER_API_KEY: "b75dddf25be4051716ceb5c94cdf367f",
-    WEATHER_API_URL: "http://api.openweathermap.org/data/2.5/",
+    WEATHER_API_URL: "https://api.openweathermap.org/data/2.5/",
 }
 
 
@@ -11,7 +11,7 @@ searchCities = (searchTem, callback) => {
         "async": true,
         "crossDomain": true,
         
-        "url": `http://geodb-free-service.wirefreethought.com/v1/geo/cities?namePrefix=${searchTem}&limit=5&offset=0&hateoasMode=false`,
+        "url": `https://geodb-free-service.wirefreethought.com/v1/geo/cities?namePrefix=${searchTem}&limit=5&offset=0&hateoasMode=false`,
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "andruxnet-world-cities-v1.p.rapidapi.com",
